@@ -1,0 +1,173 @@
+.login{
+ 
+   
+    
+}
+
+
+
+/* Initial state: transparent or light background */
+#navbar {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    background-color: #343a40 !important;
+}
+
+/* After scrolling down */
+.navbar-colored {
+    background-color: #343a40 !important;
+    /* or any color you like */
+}
+/* Color of the links BEFORE scroll */
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+    color: #262626;
+}
+
+/* Color of the navbar BEFORE scroll */
+.navbar-scroll {
+    background-color: #FFC017;
+}
+
+/* Color of the links AFTER scroll */
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+    color: #262626;
+}
+
+/* Color of the navbar AFTER scroll */
+.navbar-scrolled {
+    background-color: #fff;
+}
+
+/* An optional height of the navbar AFTER scroll */
+.navbar.navbar-scroll.navbar-scrolled {
+    padding-top: auto;
+    padding-bottom: auto;
+}
+
+.navbar-brand {
+    font-size: unset;
+    height: 3.5rem;
+}
+
+
+
+
+.main-screen{
+    width: 100%;
+    height: 50vh;
+    background-color: #3f4954;
+    display: flex;
+    justify-content: center;
+    align-items: last baseline;
+
+
+   
+}
+.main-screen h1{
+ color: #fff;
+ font-family: fantasy;
+    font-size: 3rem;
+    
+}
+
+
+
+p{
+    font-size: 14px;
+    color: #2e2e2e;
+}
+.main-screen p{
+    font-size: 16px;
+    color: #fff;
+        display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+}
+h1{
+    font-size: 12px;
+}
+a{
+    font-size: 12px;
+}
+
+.services p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.services span{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #000000;
+    border: 1px solid #000000;
+    text-align: center;
+
+}
+
+
+.services{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.card{
+    border: 0px;
+    border-radius: 10px;
+    box-shadow: 0 0px 1px rgba(0, 0, 0, 0.1);
+    transform: border 0.3s ease;
+    
+}
+.card:hover{
+    
+  border-bottom: #7e7e7e 1px solid;
+}
+.cta{
+    background-color: #ebebeb;
+    
+}
+
+.skills h2{
+    color: #fff;
+    font-family: fantasy;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 300px;
+}
+
+.skills span{
+    
+    height: 30px;
+    margin-top: 10px;
+
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border: 0px;
+    border-radius: 10px;
+    box-shadow: 0 0px 1px rgba(0, 0, 0, 0.488);
+    background-color: white;
+    transform: border 0.3s ease;
+    
+
+}
+.myskills{
+    padding: 10px;
+    background-color: whitesmoke;
+}
+.profile-header{
+    width: 100%;
+    background-color: #3f4954;
+}
