@@ -1,32 +1,42 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import RecomendJob from "./recomendjob";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [skills, setSkills] = useState([]);
+  const [string , setString] = useState("");
+  const [about, setabout] = useState([]);
+  const [cv, setcv] = useState("");
   const navigate = useNavigate();
+  var skill;
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     axios
-      .get("http://localhost:5050/jobseeker/profile", {
+      .get("http://localhost:6050/jobseeker/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        console.log("Profile data:", response.data.jobseeker_profile.skills);
-        const skills = response.data.jobseeker_profile.skills;
-        const jsonObject = JSON.parse(skills);
-        console.log("Parsed skills:", jsonObject);
+        // console.log("Profile data:", response.data.jobseeker_profile);
+        const skill = response.data.jobseeker_profile.skills;
+         console.log("Skills String:", skill);
+        setString(skill);
+        const jsonObject = JSON.parse(skill);
+        // console.log("Parsed skills:", jsonObject);
         setSkills(jsonObject);
         setUser(response.data);
+        setabout(response.data.jobseeker_profile.preferences);
+        setcv(response.data.jobseeker_profile.resume);
+        // console.log("CV:", response.data.jobseeker_profile.resume);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching profile:", error);
+        // console.error("Error fetching profile:", error);
         setLoading(false);
       });
   }, [token, navigate]);
@@ -36,167 +46,38 @@ export default function Profile() {
       {/* <div className="profile-header">
         <p>back</p>
       </div> */}
-      <div className="container  h-40 mt-5">
-        <div className="row">
-          <div className="col-6 p-5">
-            <h1 className="">Abed Alrahman</h1>
-
-            <p className="text-muted">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              voluptatibus . Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Quisquam, voluptatibus Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Quisquam, voluptatibus
-            </p>
+      <div className="container bg-light border p-5 mt-2">
+        <div className="row justify-content-between ">
+          <div className="col-12">
+            <h1>PROFILE</h1>
+            <hr></hr>
           </div>
-          <div className="col-6 p-5">
-            <p className="text-muted">
-              <b>Address</b> <br></br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            </p>
-            <div className="social-icons mt-2">
-              <a href="#!" className="me-3">
-                <i className="fab fa-facebook-f">
-                  <img width={24} src="./facebook.png" alt="face" />
-                </i>
-              </a>
-              <a href="#!" className="me-3">
-                <i className="fab fa-twitter">
-                  <img width={24} src="./linkedin (1).png" alt="face" />
-                </i>
-              </a>
-              <a href="#!" className="me-3">
-                <i className="fab fa-linkedin-in">
-                  <img width={24} src="./github.png" alt="face" />
-                </i>
-              </a>
-            </div>
+          <div className="col-md-4 border rounded p-1 text-center m-2">
+            <h5 className="cv">Download My CV</h5>
+            <a
+              href={`http://localhost:6050/${cv.replace(/\\/g, "/")}`}
+              download
+              className="btn btn-dark mt-3"
+            >
+              Download
+            </a>
+            <p className="text-start m-2">{about}</p>
           </div>
-        </div>
-      </div>
-
-      <div className="myskills">
-        <div className="container">
-          <div className="row mt-5">
-            <h2>skills</h2>
-            <p className="mt-3 text-muted skills">
-              {skills.map((skill, index) => (
-                <span key={index} className="badge bg-light text-dark">
-                  {skill}
+          <div className="col-md-7 m-2  border rounded p-1">
+            <h5 className="cv text-center">SKILLS</h5>
+            <hr></hr>
+            {skills.map((skill, index) => (
+              <div key={index} className="col-md-4 myskills">
+                <span className="text-muted myskills-span">
+                  <b>{skill}</b>
                 </span>
-              ))}
-            </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <div className="container mt-5">
-        <h2 className="mb-5">JOB For You</h2>
-        <div className="row justify-content-center">
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="card shadow-sm p-3 mb-5 bg-body rounded">
-              <div className="card-body">
-                <h5 className="card-title">ITG</h5>
-                <p className="card-text">
-                  Backend project for ITG company. Lorem ipsum dolor sit amet,
-                </p>
-                <a href="#" className="btn btn-primary">
-                  apply now
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      { skills ? ( <RecomendJob skills={string} user={user} />) : (<></>)}
+    
     </>
   );
 }

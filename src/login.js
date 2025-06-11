@@ -15,6 +15,7 @@ function Login() {
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+const [role, setrole] = useState("");
 
 
 
@@ -22,7 +23,7 @@ function handleLogin(event) {
   event.preventDefault();
   console.log("Sending:", { email, password });
   axios
-    .post("http://localhost:5050/login", {
+    .post("http://localhost:6050/login", {
       email: email,
       password: password,
     })
@@ -30,8 +31,17 @@ function handleLogin(event) {
       console.log(res.data);
       if (res.data.status === "success") {
         alert("Login successful!");
+        setrole(res.data.role);
         localStorage.setItem("token", res.data.access_token);
-        window.location.href = "/home";
+
+        
+        console.log(role);
+        if (res.data.role === "job_seeker") {
+          window.location.href = "/job_seeker";
+        } else if (res.data.role === "employer") {
+          window.location.href = "/employer";
+        }
+        
       } else {
         alert("Login failed. Please try again.");
       }
